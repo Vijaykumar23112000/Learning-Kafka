@@ -5,13 +5,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 
+import static com.magret.constants.WikimediaConstants.WIKIMEDIA_TOPIC;
+
 @Configuration
-public class Config {
+public class WikimediaTopicConfig {
 
     @Bean
     NewTopic wikimediaTopic(){
         return TopicBuilder
-                .name("wikimedia-stream")
+                .name(WIKIMEDIA_TOPIC)
                 .build();
     }
 

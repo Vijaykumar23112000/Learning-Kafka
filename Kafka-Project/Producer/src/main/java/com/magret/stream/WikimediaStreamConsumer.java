@@ -13,7 +13,9 @@ public class WikimediaStreamConsumer {
     private final WikimediaProducer wikimediaProducer;
 
     public WikimediaStreamConsumer(WebClient.Builder webClientBuilder, WikimediaProducer wikimediaProducer) {
-        this.webClient = webClientBuilder.baseUrl("https://stream.wikimedia.org/v2").build();
+        this.webClient = webClientBuilder
+                .baseUrl("https://stream.wikimedia.org/v2")
+                .build();
         this.wikimediaProducer = wikimediaProducer;
     }
 
@@ -22,7 +24,7 @@ public class WikimediaStreamConsumer {
                 .uri("/stream/recentchange")
                 .retrieve()
                 .bodyToFlux(String.class)
-                .subscribe(log::info);
+                .subscribe(wikimediaProducer::sendMessage);
     }
 
 }
